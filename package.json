@@ -1,6 +1,6 @@
 {
   "name": "@authnomicon/fedcm",
-  "version": "0.0.4",
+  "version": "0.0.0",
   "description": "Federated Credential Management components for the Authnomicon project.",
   "keywords": [
     "fedcm",
