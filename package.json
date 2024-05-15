@@ -33,7 +33,8 @@
   "assembly": {
     "namespace": "org.authnomicon/fedcm",
     "components": [
-      "oauth2/authorize/http/request/openid"
+      "service",
+      "well-known/service"
     ]
   },
   "directories": {
