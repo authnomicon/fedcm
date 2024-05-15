@@ -1,7 +1,7 @@
 {
   "name": "@authnomicon/fedcm",
   "version": "0.0.4",
-  "description": "OpenID Connect components for the Authnomicon project.",
+  "description": "Federated Credential Management components for the Authnomicon project.",
   "keywords": [
     "fedcm",
     "webidentity"
