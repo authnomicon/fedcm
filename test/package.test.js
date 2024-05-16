@@ -13,6 +13,7 @@ describe('@authnomicon/fedcm', function() {
       expect(json.assembly.namespace).to.equal('org.authnomicon/fedcm');
       expect(json.assembly.components).to.deep.equal([
         'service',
+        'tokenservice',
         'well-known/service'
       ]);
     });
