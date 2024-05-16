@@ -3,10 +3,10 @@
 var expect = require('chai').expect;
 var chai = require('chai');
 var sinon = require('sinon');
-var factory = require('../../com/handlers/assertion');
+var factory = require('../../com/handlers/clientmetadata');
 
 
-describe('handlers/assertion', function() {
+describe('handlers/clientmetadata', function() {
   
   it('should create handler', function() {
     var authenticator = new Object();
@@ -21,15 +21,14 @@ describe('handlers/assertion', function() {
   describe('handler', function() {
     
     it('should respond with token', function(done) {
-      var sts = new Object();
-      sts.issue = sinon.stub().yieldsAsync(null, 'eyJ0 ... NiJ9.eyJ1c ... I6IjIifX0.DeWt4Qu ... ZXso')
-      var handler = factory(sts);
+      var handler = factory();
     
       chai.express.use(handler)
         .finish(function() {
           expect(this).to.have.status(200);
           expect(this).to.have.body({
-            token: 'eyJ0 ... NiJ9.eyJ1c ... I6IjIifX0.DeWt4Qu ... ZXso'
+            "privacy_policy_url": "https://rp.example/clientmetadata/privacy_policy.html",
+            "terms_of_service_url": "https://rp.example/clientmetadata/terms_of_service.html"
           });
           done();
         })
