@@ -34,6 +34,7 @@
     "namespace": "org.authnomicon/fedcm",
     "components": [
       "service",
+      "tokenservice",
       "well-known/service"
     ]
   },
