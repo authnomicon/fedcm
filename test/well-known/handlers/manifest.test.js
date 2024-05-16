@@ -24,7 +24,7 @@ describe('well-known/handlers/manifest', function() {
           done();
         })
         .listen();
-    }); // should respond when origin is valid
+    }); // should respond with manifest
     
   }); // handler
   

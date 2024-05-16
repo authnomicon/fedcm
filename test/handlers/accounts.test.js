@@ -18,5 +18,28 @@ describe('handlers/accounts', function() {
     expect(authenticator.authenticate).to.be.calledWith([ 'session', 'anonymous' ], { multi: true });
   });
   
+  describe('handler', function() {
+    
+    it('should respond with empty accounts list when not logged in', function(done) {
+      var authenticator = new Object();
+      authenticator.authenticate = function(name, options) {
+        return function(req, res, next) {
+          next();
+        };
+      };
+      var handler = factory(authenticator);
+    
+      chai.express.use(handler)
+        .finish(function() {
+          expect(this).to.have.status(200);
+          expect(this).to.have.body({
+            accounts: []
+          });
+          done();
+        })
+        .listen();
+    }); // should respond with empty accounts list when not logged in
+    
+  }); // handler
   
 });
