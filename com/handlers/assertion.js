@@ -1,6 +1,6 @@
 var url = require('url');
 
-exports = module.exports = function() {
+exports = module.exports = function(sts) {
   
   // TODO: auth this request and respond with accounts
   
@@ -13,9 +13,21 @@ exports = module.exports = function() {
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     
-    res.json({
-      token: 'eyDSE'
-    })
+    
+    var msg = {
+      user: { id: req.body.account_id },
+      client: { id: req.body.client_id },
+      nonce: req.body.nonce
+    };
+    
+    sts.issue(msg, function(err, token) {
+      if (err) { return next(err); }
+      console.log('ISSUED TOKEN!')
+      console.log(token);
+      res.json({
+        token: token
+      });
+    });
   }
   
   
@@ -25,4 +37,6 @@ exports = module.exports = function() {
   ];
 };
 
-exports['@require'] = [];
+exports['@require'] = [
+  'module:@authnomicon/fedcm.TokenService'
+];
