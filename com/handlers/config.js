@@ -1,5 +1,8 @@
 var url = require('url');
 
+// https://developers.google.com/privacy-sandbox/3pcd/fedcm-developer-guide
+
+
 exports = module.exports = function() {
   
   function config(req, res, next) {
