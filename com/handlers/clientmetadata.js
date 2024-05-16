@@ -1,23 +1,24 @@
 var url = require('url');
 
-exports = module.exports = function() {
+exports = module.exports = function(clients) {
   
   // TODO: auth this request and respond with accounts
   
-  function config(req, res, next) {
-    console.log('!!!! CLIENT METADATA !!!!');
-    console.log(req.query);
-    
-    res.json({
-      "privacy_policy_url": "https://rp.example/clientmetadata/privacy_policy.html",
-      "terms_of_service_url": "https://rp.example/clientmetadata/terms_of_service.html"
-    })
+  function metadata(req, res, next) {
+    clients.read(req.query.client_id, function(err, client) {
+      var meta = {};
+      if (client.privacyPolicyURL) { meta.privacy_policy_url = client.privacyPolicyURL; }
+      if (client.termsOfServiceURL) { meta.terms_of_service_url = client.termsOfServiceURL; }
+      res.json(meta);
+    });
   }
   
   
   return [
-    config
+    metadata
   ];
 };
 
-exports['@require'] = [];
+exports['@require'] = [
+  'http://i.authnomicon.org/oauth2/ClientDirectory'
+];
