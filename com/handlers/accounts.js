@@ -4,7 +4,6 @@ exports = module.exports = function(authenticator) {
   
   function notLoggedIn(req, res, next) {
     if (!req.user) {
-      console.log('NOT LOGGED IN');
       return res.json({ accounts: [] });
     }
     next();
@@ -24,6 +23,36 @@ exports = module.exports = function(authenticator) {
     //res.json({ accounts: [] })
     
     //return;
+    
+    var accounts = []
+      , i = 0;
+    (function iter(err) {
+      if (err) { return next(err); }
+      
+      var user = users[i++];
+      if (!user) {
+        console.log('RESPONDING WITH');
+        console.log(accounts);
+        
+        // done, respond
+        return res.json({
+          accounts: accounts
+        });
+      }
+      
+      var account = {};
+      account.id = user.id;
+      account.name = user.username;
+      account.email = user.username;
+      
+      accounts.push(account);
+      iter();
+    })();
+    
+    return;
+    
+    //var users
+    
     
     res.json({ accounts: [{
       id: '1234',

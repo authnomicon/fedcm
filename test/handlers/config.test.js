@@ -20,7 +20,7 @@ describe('handlers/config', function() {
             accounts_endpoint: '/web-identity/accounts',
             client_metadata_endpoint: '/web-identity/client-metadata',
             id_assertion_endpoint: '/web-identity/assertion',
-            login_url: '/web-identity/login'
+            login_url: '/login'
           });
           done();
         })
