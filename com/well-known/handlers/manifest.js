@@ -1,5 +1,3 @@
-var url = require('url');
-
 exports = module.exports = function() {
   
   function manifest(req, res, next) {
