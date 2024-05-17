@@ -3,7 +3,7 @@
  *
  * Returns an HTTP handler that responds with a FedCM {@link https://fedidcg.github.io/FedCM/#idp-api-config-file config file}.
  * The config file serves as a service discovery mechanism for other FedCM
- * endpoints provided by the IDP.
+ * endpoints provided by the IDP, as well as declaring branding preferences.
  *
  * For additional implementation considerations, refer to the
  * {@link https://developers.google.com/privacy-sandbox/3pcd/fedcm-developer-guide#idp-config-file developer guide}
@@ -13,6 +13,8 @@
  */
 exports = module.exports = function() {
   
+  // TODO: Check Sec-Fetch-Dest header to prevent csrf attacks
+  
   function config(req, res, next) {
     var conf = {
       accounts_endpoint: '/web-identity/accounts',
@@ -20,6 +22,9 @@ exports = module.exports = function() {
       id_assertion_endpoint: '/web-identity/assertion',
       login_url: '/login'
     };
+    
+    // TODO: Implement support for branding preferences.
+    
     res.json(conf);
   }
   
