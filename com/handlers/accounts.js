@@ -8,6 +8,7 @@
  * {@link https://developers.google.com/privacy-sandbox/3pcd/fedcm-developer-guide#accounts-list-endpoint developer guide}
  * on the Privacy Sandbox at Google for Developers.
  *
+ * @param {passport.Authenticator} authenticator - Request authenticator.
  * @returns {express.RequestHandler[]}
  */
 exports = module.exports = function(authenticator) {

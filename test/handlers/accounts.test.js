@@ -65,6 +65,38 @@ describe('handlers/accounts', function() {
         .listen();
     }); // should respond with accounts list when logged into single account
     
+    it('should respond with accounts list when logged into multiple accounts', function(done) {
+      var authenticator = new Object();
+      authenticator.authenticate = function(name, options) {
+        return function(req, res, next) {
+          req.user = [
+            { id: '1', username: 'alice' },
+            { id: '2', username: 'bob' }
+          ];
+          next();
+        };
+      };
+      var handler = factory(authenticator);
+    
+      chai.express.use(handler)
+        .finish(function() {
+          expect(this).to.have.status(200);
+          expect(this).to.have.body({
+            accounts: [{
+              id: '1',
+              name: 'alice',
+              email: 'alice'
+            }, {
+              id: '2',
+              name: 'bob',
+              email: 'bob'
+            }]
+          });
+          done();
+        })
+        .listen();
+    }); // should respond with accounts list when logged into multiple accounts
+    
   }); // handler
   
 });
