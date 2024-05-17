@@ -21,14 +21,20 @@ describe('handlers/clientmetadata', function() {
   describe('handler', function() {
     
     it('should respond with token', function(done) {
-      var handler = factory();
+      var clients = new Object();
+      clients.read = sinon.stub().yieldsAsync(null, {
+        id: '',
+        privacyPolicyURL: 'https://rp.example/clientmetadata/privacy_policy.html',
+        termsOfServiceURL: 'https://rp.example/clientmetadata/terms_of_service.html'
+      });
+      var handler = factory(clients);
     
       chai.express.use(handler)
         .finish(function() {
           expect(this).to.have.status(200);
           expect(this).to.have.body({
-            "privacy_policy_url": "https://rp.example/clientmetadata/privacy_policy.html",
-            "terms_of_service_url": "https://rp.example/clientmetadata/terms_of_service.html"
+            privacy_policy_url: 'https://rp.example/clientmetadata/privacy_policy.html',
+            terms_of_service_url: 'https://rp.example/clientmetadata/terms_of_service.html'
           });
           done();
         })
