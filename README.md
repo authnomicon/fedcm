@@ -13,7 +13,8 @@ The browser mediates the user interaction between the website and the IDP, which
 enhances privacy relative to traditional federated identity protocols such as
 [OpenID Connect](https://openid.net/) and [SAML](https://saml.xml.org/saml-specifications),
 which are unmediated and operate using redirects, iframes, or other mechanisms
-that expose third-party cookies.
+that rely on third-party cookies (which, unfortunately, are also abused to track
+users).
 
 This package provides components that implement the HTTP-based API, which are
 used when building a FedCM-compatible IDP.
