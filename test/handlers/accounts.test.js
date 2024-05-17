@@ -97,6 +97,37 @@ describe('handlers/accounts', function() {
         .listen();
     }); // should respond with accounts list when logged into multiple accounts
     
+    it('should respond with account containing single email address', function(done) {
+      var authenticator = new Object();
+      authenticator.authenticate = function(name, options) {
+        return function(req, res, next) {
+          req.user = {
+            id: '1234',
+            displayName: 'John Doe',
+            emails: [{
+              value: 'john_doe@idp.example'
+            }]
+          };
+          next();
+        };
+      };
+      var handler = factory(authenticator);
+    
+      chai.express.use(handler)
+        .finish(function() {
+          expect(this).to.have.status(200);
+          expect(this).to.have.body({
+            accounts: [{
+              id: '1234',
+              name: 'John Doe',
+              email: 'john_doe@idp.example'
+            }]
+          });
+          done();
+        })
+        .listen();
+    }); // should respond with account containing single email address
+    
   }); // handler
   
 });

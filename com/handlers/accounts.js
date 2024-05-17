@@ -45,10 +45,18 @@ exports = module.exports = function(authenticator) {
         });
       }
       
-      var account = {};
+      var account = {}
+        , field;
       account.id = user.id;
-      account.name = user.username;
+      // NOTE: `name`, and `email` are required, so they are populated with the
+      // closest available property that has a value.
+      account.name = user.displayName || user.username;
       account.email = user.username;
+      if (user.emails && user.emails.length) {
+        field = user.emails[0];
+        account.email = field.value;
+      }
+      account.name = account.name || account.email;
       
       accounts.push(account);
       iter();
