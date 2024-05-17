@@ -1,6 +1,9 @@
 /**
  * Create config file handler.
  *
+ * Returns an HTTP handler that responds with a FedCM {@link https://fedidcg.github.io/FedCM/#idp-api-config-file config file}.
+ * The config file serves as a service discovery mechanism for other FedCM
+ * endpoints provided by the IDP.
  *
  * @returns {express.RequestHandler[]}
  */
