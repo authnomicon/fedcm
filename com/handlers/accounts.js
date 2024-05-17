@@ -1,4 +1,18 @@
+/**
+ * Create accounts handler.
+ *
+ * Returns an HTTP handler that responds with a list of accounts the user is
+ * signed into at the IDP, in accordance with the FedCM {@link https://fedidcg.github.io/FedCM/#idp-api-accounts-endpoint accounts endpoint}.
+ *
+ * For additional implementation considerations, refer to the
+ * {@link https://developers.google.com/privacy-sandbox/3pcd/fedcm-developer-guide#accounts-list-endpoint developer guide}
+ * on the Privacy Sandbox at Google for Developers.
+ *
+ * @returns {express.RequestHandler[]}
+ */
 exports = module.exports = function(authenticator) {
+  
+  // TODO: Check Sec-Fetch-Dest header to prevent csrf attacks
   
   function notLoggedIn(req, res, next) {
     if (!req.user) {
@@ -48,6 +62,7 @@ exports = module.exports = function(authenticator) {
   ];
 };
 
+// Module annotations.
 exports['@require'] = [
   'module:passport.Authenticator'
 ];
