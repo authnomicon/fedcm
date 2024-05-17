@@ -1,8 +1,9 @@
-var url = require('url');
-
-// https://developers.google.com/privacy-sandbox/3pcd/fedcm-developer-guide
-
-
+/**
+ * Create config file handler.
+ *
+ *
+ * @returns {express.RequestHandler[]}
+ */
 exports = module.exports = function() {
   
   function config(req, res, next) {
@@ -21,4 +22,5 @@ exports = module.exports = function() {
   ];
 };
 
+// Module annotations.
 exports['@require'] = [];
