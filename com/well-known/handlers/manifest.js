@@ -10,6 +10,10 @@
  * that would enable the IDP to track websites the user is visiting, thus
  * violating privacy expectations.
  *
+ * For additional implementation considerations, refer to the
+ * {@link https://developers.google.com/privacy-sandbox/3pcd/fedcm-developer-guide#well-known-file developer guide}
+ * on the Privacy Sandbox at Google for Developers.
+ *
  * @returns {express.RequestHandler[]}
  */
 exports = module.exports = function() {
