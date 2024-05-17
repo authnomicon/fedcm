@@ -20,6 +20,8 @@ exports = module.exports = function() {
       accounts_endpoint: '/web-identity/accounts',
       client_metadata_endpoint: '/web-identity/client-metadata',
       id_assertion_endpoint: '/web-identity/assertion',
+      // NOTE: The login page URL is not specified in the FedCM specification,
+      //       but it is implemented by Google Chrome.
       login_url: '/login'
     };
     
