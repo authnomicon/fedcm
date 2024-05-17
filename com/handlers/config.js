@@ -5,6 +5,10 @@
  * The config file serves as a service discovery mechanism for other FedCM
  * endpoints provided by the IDP.
  *
+ * For additional implementation considerations, refer to the
+ * {@link https://developers.google.com/privacy-sandbox/3pcd/fedcm-developer-guide#idp-config-file developer guide}
+ * on the Privacy Sandbox at Google for Developers.
+ *
  * @returns {express.RequestHandler[]}
  */
 exports = module.exports = function() {
