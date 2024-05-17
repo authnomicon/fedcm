@@ -2,7 +2,7 @@
 var express = require('express');
 
 /**
- * Create FedCM well-known service.
+ * Create Federated Credential Management well-known service.
  *
  * @param {express.RequestHandler} manifestHandler - Handler which responds with
  *          the well-known file.

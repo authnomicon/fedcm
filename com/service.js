@@ -1,5 +1,13 @@
+// Module dependencies.
 var express = require('express');
 
+/**
+ * Create Federated Credential Management service.
+ *
+ * @param {express.RequestHandler} configHandler - Handler which responds with
+ *          the config file.
+ * @returns {express.Router}
+ */
 exports = module.exports = function(configHandler, accountsHandler, clientMetadataHandler, assertionHandler) {
   var router = express.Router();
   router.get('/config.json', configHandler);
@@ -10,6 +18,7 @@ exports = module.exports = function(configHandler, accountsHandler, clientMetada
   return router;
 };
 
+// Module annotations.
 exports['@implements'] = 'http://i.bixbyjs.org/http/Service';
 exports['@path'] = '/web-identity';
 exports['@require'] = [
