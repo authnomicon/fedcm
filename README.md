@@ -2,17 +2,21 @@
 
 Federated Credential Managment components for the Authnomicon project.
 
-Federated Credential Management (FedCM) is a privacy-preserving to federated
-identity.  It consists of a client-side Web API and an HTTP-based API.  The Web
-API is called by a website via JavaScript executing in the browser, and is used
-to sign a user in using their identity provider (IDP).  The HTTP API is a set of
-endpoints implemented by the IDP, which are requested by the browser during the
-sign in ceremony.
+[Federated Credential Management](https://fedidcg.github.io/FedCM/) (FedCM) is a
+privacy-preserving approach to federated identity.  It consists of a client-side
+Web API and an HTTP-based API.  The Web API is called by a website via
+JavaScript executing in the browser, and is used to sign a user in using their
+identity provider (IDP).  The HTTP API is a set of endpoints implemented by the
+IDP, which are requested by the browser during the sign in ceremony.
 
 The browser mediates the user interaction between the website and the IDP, which
 enhances privacy relative to traditional federated identity protocols such as
-OpenID Connect and SAML, which are unmediated and operate using redirection,
-IFrames, or other cross-origin mechanisms.
+[OpenID Connect](https://openid.net/) and [SAML](https://saml.xml.org/saml-specifications),
+which are unmediated and operate using redirects, iframes, or other mechanisms
+that expose third-party cookies.
+
+This package provides components that implement the HTTP-based API, which are
+used when building a FedCM-compatible IDP.
 
 <p align="right">
   <sup>Developed by <a href="#authors">Jared Hanson</a>.</sub>
