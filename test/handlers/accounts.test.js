@@ -31,10 +31,11 @@ describe('handlers/accounts', function() {
     
       chai.express.use(handler)
         .finish(function() {
-          expect(this).to.have.status(200);
-          expect(this).to.have.body({
-            accounts: []
-          });
+          expect(this).to.have.status(401);
+          expect(this.body).to.be.undefined;
+          //expect(this).to.have.body({
+          //  accounts: []
+          //});
           done();
         })
         .listen();

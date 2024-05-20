@@ -7,7 +7,7 @@ exports = module.exports = function() {
   
   return [
     require('body-parser').urlencoded({ extended: false }),
-    issue
+    disconnect
   ];
 };
 

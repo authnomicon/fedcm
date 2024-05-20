@@ -38,10 +38,12 @@ exports = module.exports = function(authenticator) {
       //
       // > Provider's accounts list is empty.
       //
+      // Chrome's behavior in either case seems otherwise identical.
+      //
       // [1]: https://developers.google.com/privacy-sandbox/3pcd/fedcm-developer-guide#accounts-list-endpoint
       
-      //return res.status(401).end();
-      return res.json({ accounts: [] });
+      return res.status(401).end();
+      //return res.json({ accounts: [] });
     }
     next();
   }
