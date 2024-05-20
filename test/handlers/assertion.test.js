@@ -26,7 +26,24 @@ describe('handlers/assertion', function() {
       var handler = factory(sts);
     
       chai.express.use(handler)
+        .request(function(req) {
+          req.body = {
+            account_id: '123',
+            client_id: 'client1234',
+            nonce: 'Ct60bD'
+          };
+        })
         .finish(function() {
+          expect(sts.issue).to.have.been.calledOnceWith({
+            user: {
+              id: '123',
+            },
+            client: {
+              id: 'client1234'
+            },
+            nonce: 'Ct60bD'
+          });
+          
           expect(this).to.have.status(200);
           expect(this).to.have.body({
             token: 'eyJ0 ... NiJ9.eyJ1c ... I6IjIifX0.DeWt4Qu ... ZXso'

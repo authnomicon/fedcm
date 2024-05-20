@@ -1,5 +1,16 @@
-var url = require('url');
-
+/**
+ * Create identity assertion handler.
+ *
+ * Returns an HTTP handler that responds with token that contains signed
+ * assertions about the user, in accordance with the FedCM {@link https://fedidcg.github.io/FedCM/#idp-api-id-assertion-endpoint accounts endpoint}.
+ *
+ * For additional implementation considerations, refer to the
+ * {@link https://developers.google.com/privacy-sandbox/3pcd/fedcm-developer-guide#id-assertion-endpoint developer guide}
+ * on the Privacy Sandbox at Google for Developers.
+ *
+ * @param {passport.Authenticator} authenticator - Request authenticator.
+ * @returns {express.RequestHandler[]}
+ */
 exports = module.exports = function(sts) {
   
   // TODO: auth this request and respond with accounts
