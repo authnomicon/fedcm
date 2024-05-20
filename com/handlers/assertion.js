@@ -8,7 +8,7 @@
  * {@link https://developers.google.com/privacy-sandbox/3pcd/fedcm-developer-guide#id-assertion-endpoint developer guide}
  * on the Privacy Sandbox at Google for Developers.
  *
- * @param {passport.Authenticator} authenticator - Request authenticator.
+ * @param {@authnomicon/fedcm.TokenService} sts - Security token service.
  * @returns {express.RequestHandler[]}
  */
 exports = module.exports = function(sts) {

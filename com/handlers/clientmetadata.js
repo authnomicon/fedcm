@@ -8,6 +8,7 @@
  * {@link https://developers.google.com/privacy-sandbox/3pcd/fedcm-developer-guide#client-metadata-endpoint developer guide}
  * on the Privacy Sandbox at Google for Developers.
  *
+ * @param {@authnomicon/oauth.ClientDirectory} clients - Client directory.
  * @returns {express.RequestHandler[]}
  */
 exports = module.exports = function(clients) {
