@@ -13,9 +13,11 @@
  */
 exports = module.exports = function(sts) {
   
-  // TODO: auth this request and respond with accounts
+  // TODO: auth this request based on account_id
   
   function issue(req, res, next) {
+    // TODO: check origin header against client
+    
     // These headers need to be set, otherwise the browser fails
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     res.setHeader('Access-Control-Allow-Credentials', 'true');
