@@ -68,6 +68,10 @@ exports = module.exports = function(authenticator) {
         account.picture = primaryValue(user.photos);
       }
       
+      // TODO: add approved_clients
+      // TODO: add login_hints
+      // TODO: add domain_hints
+      
       accounts.push(account);
       iter();
     })();
