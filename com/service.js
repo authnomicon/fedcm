@@ -8,6 +8,8 @@ var express = require('express');
  *          the config file.
  * @param {express.RequestHandler} accountsHandler - Handler which responds with
  *          the list of accounts the user is signed into.
+ * @param {express.RequestHandler} clientMetadataHandler - Handler which
+ *.         responds with metadata about a relying party.
  * @returns {express.Router}
  */
 exports = module.exports = function(configHandler, accountsHandler, clientMetadataHandler, assertionHandler) {
