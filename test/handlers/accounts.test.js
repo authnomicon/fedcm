@@ -138,7 +138,7 @@ describe('handlers/accounts', function() {
             emails: [{
               value: 'mhashimoto@plaxo.com'
             }, {
-              value: 'mhashimoto@-04plaxo.com',
+              value: 'mhashimoto-04@plaxo.com',
               primary: true
             }]
           };
@@ -154,13 +154,46 @@ describe('handlers/accounts', function() {
             accounts: [{
               id: '703887',
               name: 'Mork Hashimoto',
-              email: 'mhashimoto@-04plaxo.com'
+              email: 'mhashimoto-04@plaxo.com'
             }]
           });
           done();
         })
         .listen();
     }); // should respond with account containing primary email address
+    
+    it('should respond with account containing first of multiple email addresses', function(done) {
+      var authenticator = new Object();
+      authenticator.authenticate = function(name, options) {
+        return function(req, res, next) {
+          req.user = {
+            id: '703887',
+            displayName: 'Mork Hashimoto',
+            emails: [{
+              value: 'mhashimoto@plaxo.com'
+            }, {
+              value: 'mhashimoto@-04plaxo.com'
+            }]
+          };
+          next();
+        };
+      };
+      var handler = factory(authenticator);
+    
+      chai.express.use(handler)
+        .finish(function() {
+          expect(this).to.have.status(200);
+          expect(this).to.have.body({
+            accounts: [{
+              id: '703887',
+              name: 'Mork Hashimoto',
+              email: 'mhashimoto@plaxo.com'
+            }]
+          });
+          done();
+        })
+        .listen();
+    }); // should respond with account containing first of multiple email addresses
     
   }); // handler
   
