@@ -15,11 +15,7 @@ exports = module.exports = function(sts) {
   
   // TODO: auth this request and respond with accounts
   
-  function config(req, res, next) {
-    console.log('RESPOND WITH TOKEN!');
-    console.log(req.headers)
-    console.log(req.body);
-    
+  function issue(req, res, next) {
     // These headers need to be set, otherwise the browser fails
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -31,10 +27,10 @@ exports = module.exports = function(sts) {
       nonce: req.body.nonce
     };
     
+    // TODO: handle disclosure_text_shown
+    
     sts.issue(msg, function(err, token) {
       if (err) { return next(err); }
-      console.log('ISSUED TOKEN!')
-      console.log(token);
       res.json({
         token: token
       });
@@ -44,7 +40,7 @@ exports = module.exports = function(sts) {
   
   return [
     require('body-parser').urlencoded({ extended: false }),
-    config
+    issue
   ];
 };
 
