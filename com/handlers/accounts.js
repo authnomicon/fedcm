@@ -61,6 +61,9 @@ exports = module.exports = function(authenticator) {
       if (user.emails && user.emails.length) {
         account.email = primaryValue(user.emails);
       }
+      if (user.name && user.name.givenName) {
+        account.given_name = user.name.givenName;
+      }
       if (user.photos && user.photos.length) {
         account.picture = primaryValue(user.photos);
       }

@@ -256,6 +256,42 @@ describe('handlers/accounts', function() {
         .listen();
     }); // should respond with account containing first of multiple email addresses
     
+    it('should respond with given name', function(done) {
+      var authenticator = new Object();
+      authenticator.authenticate = function(name, options) {
+        return function(req, res, next) {
+          req.user = {
+            id: '703887',
+            displayName: 'Mork Hashimoto',
+            name: {
+              familyName: 'Hashimoto',
+              givenName: 'Mork'
+            },
+            emails: [{
+              value: 'mhashimoto@plaxo.com'
+            }]
+          };
+          next();
+        };
+      };
+      var handler = factory(authenticator);
+    
+      chai.express.use(handler)
+        .finish(function() {
+          expect(this).to.have.status(200);
+          expect(this).to.have.body({
+            accounts: [{
+              id: '703887',
+              name: 'Mork Hashimoto',
+              email: 'mhashimoto@plaxo.com',
+              given_name: 'Mork'
+            }]
+          });
+          done();
+        })
+        .listen();
+    }); // should respond with given name
+    
     it('should respond with account containing single photo', function(done) {
       var authenticator = new Object();
       authenticator.authenticate = function(name, options) {
