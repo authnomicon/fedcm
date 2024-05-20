@@ -97,6 +97,35 @@ describe('handlers/accounts', function() {
         .listen();
     }); // should respond with accounts list when logged into multiple accounts
     
+    it('should respond with display name in preference to username', function(done) {
+      var authenticator = new Object();
+      authenticator.authenticate = function(name, options) {
+        return function(req, res, next) {
+          req.user = {
+            id: '703887',
+            username: 'mhashimoto',
+            displayName: 'Mork Hashimoto'
+          };
+          next();
+        };
+      };
+      var handler = factory(authenticator);
+    
+      chai.express.use(handler)
+        .finish(function() {
+          expect(this).to.have.status(200);
+          expect(this).to.have.body({
+            accounts: [{
+              id: '703887',
+              name: 'Mork Hashimoto',
+              email: 'mhashimoto'
+            }]
+          });
+          done();
+        })
+        .listen();
+    }); // should respond with display name in preference to username
+    
     it('should respond with account containing single email address', function(done) {
       var authenticator = new Object();
       authenticator.authenticate = function(name, options) {
