@@ -1,3 +1,15 @@
+/**
+ * Create client metadata handler.
+ *
+ * Returns an HTTP handler that responds with metadata about a relying party, in
+ * accordance with the FedCM {@link https://fedidcg.github.io/FedCM/#idp-api-client-id-metadata-endpoint client metadata endpoint}.
+ *
+ * For additional implementation considerations, refer to the
+ * {@link https://developers.google.com/privacy-sandbox/3pcd/fedcm-developer-guide#client-metadata-endpoint developer guide}
+ * on the Privacy Sandbox at Google for Developers.
+ *
+ * @returns {express.RequestHandler[]}
+ */
 exports = module.exports = function(clients) {
   
   function metadata(req, res, next) {
@@ -20,6 +32,7 @@ exports = module.exports = function(clients) {
   ];
 };
 
+// Module annotations.
 exports['@require'] = [
   'http://i.authnomicon.org/oauth2/ClientDirectory'
 ];
