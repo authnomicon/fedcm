@@ -1,7 +1,7 @@
 /**
  * Create identity assertion handler.
  *
- * Returns an HTTP handler that responds with token that contains signed
+ * Returns an HTTP handler that responds with a token that contains signed
  * assertions about the user, in accordance with the FedCM {@link https://fedidcg.github.io/FedCM/#idp-api-id-assertion-endpoint accounts endpoint}.
  *
  * For additional implementation considerations, refer to the

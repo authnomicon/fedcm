@@ -10,6 +10,8 @@ var express = require('express');
  *          the list of accounts the user is signed into.
  * @param {express.RequestHandler} clientMetadataHandler - Handler which
  *.         responds with metadata about a relying party.
+ * @param {express.RequestHandler} assertionHandler - Handler which responds
+ *.         with a token that contains signed assertions about the user.
  * @returns {express.Router}
  */
 exports = module.exports = function(configHandler, accountsHandler, clientMetadataHandler, assertionHandler) {
