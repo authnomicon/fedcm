@@ -128,6 +128,40 @@ describe('handlers/accounts', function() {
         .listen();
     }); // should respond with account containing single email address
     
+    it('should respond with account containing primary email address', function(done) {
+      var authenticator = new Object();
+      authenticator.authenticate = function(name, options) {
+        return function(req, res, next) {
+          req.user = {
+            id: '703887',
+            displayName: 'Mork Hashimoto',
+            emails: [{
+              value: 'mhashimoto@plaxo.com'
+            }, {
+              value: 'mhashimoto@-04plaxo.com',
+              primary: true
+            }]
+          };
+          next();
+        };
+      };
+      var handler = factory(authenticator);
+    
+      chai.express.use(handler)
+        .finish(function() {
+          expect(this).to.have.status(200);
+          expect(this).to.have.body({
+            accounts: [{
+              id: '703887',
+              name: 'Mork Hashimoto',
+              email: 'mhashimoto@-04plaxo.com'
+            }]
+          });
+          done();
+        })
+        .listen();
+    }); // should respond with account containing primary email address
+    
   }); // handler
   
 });

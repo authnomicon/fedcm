@@ -1,3 +1,9 @@
+function primaryValue(values) {
+  var value = values.find(function(e) { return e.primary; });
+  value = value || values[0];
+  return value.value;
+}
+
 /**
  * Create accounts handler.
  *
@@ -53,8 +59,7 @@ exports = module.exports = function(authenticator) {
       account.name = user.displayName || user.username;
       account.email = user.username;
       if (user.emails && user.emails.length) {
-        field = user.emails[0];
-        account.email = field.value;
+        account.email = primaryValue(user.emails);
       }
       account.name = account.name || account.email;
       
