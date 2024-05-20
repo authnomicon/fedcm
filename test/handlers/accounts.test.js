@@ -260,6 +260,39 @@ describe('handlers/accounts', function() {
         .listen();
     }); // should respond with account containing primary photo
     
+    it('should respond with account containing first of multiple photos', function(done) {
+      var authenticator = new Object();
+      authenticator.authenticate = function(name, options) {
+        return function(req, res, next) {
+          req.user = {
+            id: '703887',
+            displayName: 'Mork Hashimoto',
+            photos: [{
+              value: 'http://sample.site.org/photos/12345.jpg'
+            }, {
+              value: 'http://sample.site.org/photos/12345-04.jpg'
+            }]
+          };
+          next();
+        };
+      };
+      var handler = factory(authenticator);
+    
+      chai.express.use(handler)
+        .finish(function() {
+          expect(this).to.have.status(200);
+          expect(this).to.have.body({
+            accounts: [{
+              id: '703887',
+              name: 'Mork Hashimoto',
+              picture: 'http://sample.site.org/photos/12345.jpg'
+            }]
+          });
+          done();
+        })
+        .listen();
+    }); // should respond with account containing first of multiple photos
+    
   }); // handler
   
 });
