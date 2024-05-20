@@ -203,7 +203,7 @@ describe('handlers/accounts', function() {
             id: '1234',
             displayName: 'John Doe',
             photos: [{
-              value: 'http://sample.site.org/photos/12345.jpg'
+              value: 'https://idp.example/profile/123'
             }]
           };
           next();
@@ -218,13 +218,47 @@ describe('handlers/accounts', function() {
             accounts: [{
               id: '1234',
               name: 'John Doe',
-              picture: 'http://sample.site.org/photos/12345.jpg'
+              picture: 'https://idp.example/profile/123'
             }]
           });
           done();
         })
         .listen();
     }); // should respond with account containing single photo
+    
+    it('should respond with account containing primary photo', function(done) {
+      var authenticator = new Object();
+      authenticator.authenticate = function(name, options) {
+        return function(req, res, next) {
+          req.user = {
+            id: '703887',
+            displayName: 'Mork Hashimoto',
+            photos: [{
+              value: 'http://sample.site.org/photos/12345.jpg'
+            }, {
+              value: 'http://sample.site.org/photos/12345-04.jpg',
+              primary: true
+            }]
+          };
+          next();
+        };
+      };
+      var handler = factory(authenticator);
+    
+      chai.express.use(handler)
+        .finish(function() {
+          expect(this).to.have.status(200);
+          expect(this).to.have.body({
+            accounts: [{
+              id: '703887',
+              name: 'Mork Hashimoto',
+              picture: 'http://sample.site.org/photos/12345-04.jpg'
+            }]
+          });
+          done();
+        })
+        .listen();
+    }); // should respond with account containing primary photo
     
   }); // handler
   
