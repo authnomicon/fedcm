@@ -22,7 +22,7 @@ describe('handlers/assertion', function() {
     
     it('should respond with token', function(done) {
       var sts = new Object();
-      sts.issue = sinon.stub().yieldsAsync(null, 'eyJ0 ... NiJ9.eyJ1c ... I6IjIifX0.DeWt4Qu ... ZXso')
+      sts.issue = sinon.stub().yieldsAsync(null, 'eyJC...J9.eyJzdWTE2...MjM5MDIyfQ.SflV_adQssw....5c')
       var handler = factory(sts);
     
       chai.express.use(handler)
@@ -46,7 +46,7 @@ describe('handlers/assertion', function() {
           
           expect(this).to.have.status(200);
           expect(this).to.have.body({
-            token: 'eyJ0 ... NiJ9.eyJ1c ... I6IjIifX0.DeWt4Qu ... ZXso'
+            token: 'eyJC...J9.eyJzdWTE2...MjM5MDIyfQ.SflV_adQssw....5c'
           });
           done();
         })
