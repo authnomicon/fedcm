@@ -195,6 +195,37 @@ describe('handlers/accounts', function() {
         .listen();
     }); // should respond with account containing first of multiple email addresses
     
+    it('should respond with account containing single photo', function(done) {
+      var authenticator = new Object();
+      authenticator.authenticate = function(name, options) {
+        return function(req, res, next) {
+          req.user = {
+            id: '1234',
+            displayName: 'John Doe',
+            photos: [{
+              value: 'http://sample.site.org/photos/12345.jpg'
+            }]
+          };
+          next();
+        };
+      };
+      var handler = factory(authenticator);
+    
+      chai.express.use(handler)
+        .finish(function() {
+          expect(this).to.have.status(200);
+          expect(this).to.have.body({
+            accounts: [{
+              id: '1234',
+              name: 'John Doe',
+              picture: 'http://sample.site.org/photos/12345.jpg'
+            }]
+          });
+          done();
+        })
+        .listen();
+    }); // should respond with account containing single photo
+    
   }); // handler
   
 });
