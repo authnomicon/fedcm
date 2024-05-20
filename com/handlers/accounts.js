@@ -23,6 +23,19 @@ exports = module.exports = function(authenticator) {
   
   function notLoggedIn(req, res, next) {
     if (!req.user) {
+      // NOTE: Google's [developer guide][1] states:
+      //
+      // > If the user is not signed in, respond with HTTP 401 (Unauthorized).
+      //
+      // However, when following this guidance, Chrome (as seen in version 125)
+      // prints the following errors to the console:
+      //
+      // > When fetching the accounts endpoint, a 401 HTTP response code was received.
+      // > The provider's accounts list fetch resulted in an error response code.
+      //
+      // [1]: https://developers.google.com/privacy-sandbox/3pcd/fedcm-developer-guide#accounts-list-endpoint
+      
+      //return res.status(401).end();
       return res.json({ accounts: [] });
     }
     next();
