@@ -16,8 +16,9 @@ describe('service', function() {
     function accountsHandler() {};
     function clientMetadataHandler() {};
     function assertionHandler() {};
+    function disconnectHandler() {};
   
-    var service = factory(configHandler, accountsHandler, clientMetadataHandler, assertionHandler);
+    var service = factory(configHandler, accountsHandler, clientMetadataHandler, assertionHandler, disconnectHandler);
     
     expect(service).to.be.a('function');
     expect(service.length).to.equal(3);

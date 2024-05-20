@@ -14,12 +14,13 @@ var express = require('express');
  *.         with a token that contains signed assertions about the user.
  * @returns {express.Router}
  */
-exports = module.exports = function(configHandler, accountsHandler, clientMetadataHandler, assertionHandler) {
+exports = module.exports = function(configHandler, accountsHandler, clientMetadataHandler, assertionHandler, disconnectHandler) {
   var router = express.Router();
   router.get('/config.json', configHandler);
   router.get('/accounts', accountsHandler);
   router.get('/client-metadata', clientMetadataHandler);
   router.post('/assertion', assertionHandler);
+  router.post('/disconnect', disconnectHandler);
   
   return router;
 };
@@ -31,5 +32,6 @@ exports['@require'] = [
   './handlers/config',
   './handlers/accounts',
   './handlers/clientmetadata',
-  './handlers/assertion'
+  './handlers/assertion',
+  './handlers/disconnect'
 ];
