@@ -1,8 +1,4 @@
-var url = require('url');
-
 exports = module.exports = function(clients) {
-  
-  // TODO: auth this request and respond with accounts
   
   function metadata(req, res, next) {
     clients.read(req.query.client_id, function(err, client) {

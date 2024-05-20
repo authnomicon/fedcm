@@ -9,28 +9,30 @@ var factory = require('../../com/handlers/clientmetadata');
 describe('handlers/clientmetadata', function() {
   
   it('should create handler', function() {
-    var authenticator = new Object();
-    authenticator.authenticate = sinon.spy();
-    var handler = factory(authenticator);
+    var handler = factory();
     
     expect(handler).to.be.an('array');
-    //expect(authenticator.authenticate).to.be.calledOnce;
-    //expect(authenticator.authenticate).to.be.calledWith([ 'session', 'anonymous' ], { multi: true });
   });
   
   describe('handler', function() {
     
-    it('should respond with token', function(done) {
+    it('should respond with privacy policy and terms of service', function(done) {
       var clients = new Object();
       clients.read = sinon.stub().yieldsAsync(null, {
-        id: '',
+        id: '1234',
         privacyPolicyURL: 'https://rp.example/clientmetadata/privacy_policy.html',
         termsOfServiceURL: 'https://rp.example/clientmetadata/terms_of_service.html'
       });
       var handler = factory(clients);
     
       chai.express.use(handler)
+        .request(function(req) {
+          req.query = {};
+          req.query.client_id = '1234';
+        })
         .finish(function() {
+          expect(clients.read).to.have.been.calledOnceWith('1234');
+          
           expect(this).to.have.status(200);
           expect(this).to.have.body({
             privacy_policy_url: 'https://rp.example/clientmetadata/privacy_policy.html',
@@ -39,7 +41,7 @@ describe('handlers/clientmetadata', function() {
           done();
         })
         .listen();
-    }); // should respond with token
+    }); // should respond with privacy policy and terms of service
     
   }); // handler
   
