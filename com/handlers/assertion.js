@@ -15,6 +15,9 @@ exports = module.exports = function(sts) {
   
   // TODO: auth this request based on account_id
   
+  // TODO: likely call an authz service to give it a chance to deny, for instance if
+  //.  is_auto_selected
+  
   function issue(req, res, next) {
     // TODO: check origin header against client
     
