@@ -6,6 +6,8 @@ var express = require('express');
  *
  * @param {express.RequestHandler} configHandler - Handler which responds with
  *          the config file.
+ * @param {express.RequestHandler} accountsHandler - Handler which responds with
+ *          the list of accounts the user is signed into.
  * @returns {express.Router}
  */
 exports = module.exports = function(configHandler, accountsHandler, clientMetadataHandler, assertionHandler) {
